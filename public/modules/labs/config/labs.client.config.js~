@@ -6,5 +6,7 @@ angular.module('labs').run(['Menus',
 		// Set top bar menu items
 		Menus.addMenuItem('topbar', 'Rooms', 'rooms', 'dropdown');
 		Menus.addSubMenuItem('topbar', 'rooms', 'Labs', 'labs', '/labs(/create)?');
+		Menus.addSubMenuItem('topbar', 'rooms/labs', 'List Labs', 'labs');
+		Menus.addSubMenuItem('topbar', 'labs', 'New Lab', 'labs/create');
 	}
 ]);

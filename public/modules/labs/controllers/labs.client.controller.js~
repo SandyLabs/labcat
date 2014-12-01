@@ -1,16 +1,16 @@
 'use strict';
 
 // Labs controller
-angular.module('labs').controller('LabsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Labs',
-	function($scope, $stateParams, $location, Authentication, Labs) {
+angular.module('labs').controller('LabsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Labs', 'Buildings',
+	function($scope, $stateParams, $location, Authentication, Labs, Buildings) {
 		$scope.authentication = Authentication;
+		$scope.buildings = Buildings.query();
 
 		// Create new Lab
 		$scope.create = function() {
 			// Create new Lab object
 			var lab = new Labs ({
-				name: this.name,
-				building: this.building
+				name: this.name
 			});
 
 			// Redirect after save

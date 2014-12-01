@@ -1,0 +1,19 @@
+<section data-ng-controller="ProcessesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Processes</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="process in processes" data-ng-href="#!/processes/{{process._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="process.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="process.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="process.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!processes.$resolved || processes.length">
+    	No Processes yet, why don't you <a href="/#!/processes/create">create one</a>?
+    </div>
+</section>
