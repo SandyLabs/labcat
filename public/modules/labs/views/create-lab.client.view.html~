@@ -14,7 +14,7 @@
 		<div class="form-group">
                     <label class="control-label" for="building">Building</label>
                     <div class="controls">
-			<select data-ng-model="Building" ng-options="building.id as building.name for building in buildings" id="building" 					class="form-control" placeholder="Building" required>
+			<select data-ng-model="building" ng-options="building.id as building.name for building in Buildings" id="building" 					class="form-control" placeholder="Building" required>
 			</select>
                     </div>
                 </div>

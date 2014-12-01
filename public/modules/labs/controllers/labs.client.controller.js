@@ -9,8 +9,7 @@ angular.module('labs').controller('LabsController', ['$scope', '$stateParams', '
 		$scope.create = function() {
 			// Create new Lab object
 			var lab = new Labs ({
-				name: this.name,
-				building: this.building
+				name: this.name
 			});
 
 			// Redirect after save
