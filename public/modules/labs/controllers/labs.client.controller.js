@@ -1,9 +1,10 @@
 'use strict';
 
 // Labs controller
-angular.module('labs').controller('LabsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Labs',
-	function($scope, $stateParams, $location, Authentication, Labs) {
+angular.module('labs').controller('LabsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Labs', 'Buildings',
+	function($scope, $stateParams, $location, Authentication, Labs, Buildings) {
 		$scope.authentication = Authentication;
+		$scope.buildings = Buildings.query();
 
 		// Create new Lab
 		$scope.create = function() {
