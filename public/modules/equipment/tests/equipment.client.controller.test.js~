@@ -52,12 +52,12 @@
 
 		it('$scope.find() should create an array with at least one Equipment object fetched from XHR', inject(function(Equipment) {
 			// Create sample Equipment using the Equipment service
-			var sampleEquipmentSingle = new Equipment({
+			var sampleEquipment = new Equipment({
 				name: 'New Equipment'
 			});
 
 			// Create a sample Equipment array that includes the new Equipment
-			var sampleEquipment = [sampleEquipmentSingle];
+			var sampleEquipment = [sampleEquipment];
 
 			// Set GET response
 			$httpBackend.expectGET('equipment').respond(sampleEquipment);

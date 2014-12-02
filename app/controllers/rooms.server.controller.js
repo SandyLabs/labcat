@@ -5,102 +5,111 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
+	Room = mongoose.model('Room'),
 	Lab = mongoose.model('Lab'),
+	Store = mongoose.model('Store'),
+	Building = mongoose.model('Building'),
 	_ = require('lodash');
 
 /**
- * Create a Lab
+ * Create a Room
  */
 exports.create = function(req, res) {
-	var lab = new Lab(req.body);
-	lab.user = req.user;
 
-	lab.save(function(err) {
+	var room;
+	if(req.body.type === 'Lab') {
+		room = new Lab(req.body);
+	} else {
+		room = new Store(req.body);
+	}
+	room.user = req.user;
+
+	room.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(lab);
+			res.jsonp(room);
 		}
 	});
 };
 
 /**
- * Show the current Lab
+ * Show the current Room
  */
 exports.read = function(req, res) {
-	res.jsonp(req.lab);
+	res.jsonp(req.room);
 };
 
 /**
- * Update a Lab
+ * Update a Room
  */
 exports.update = function(req, res) {
-	var lab = req.lab ;
+	var room = req.room ;
 
-	lab = _.extend(lab , req.body);
+	room = _.extend(room , req.body);
 
-	lab.save(function(err) {
+	room.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(lab);
+			res.jsonp(room);
 		}
 	});
 };
 
 /**
- * Delete an Lab
+ * Delete an Room
  */
 exports.delete = function(req, res) {
-	var lab = req.lab ;
+	var room = req.room ;
 
-	lab.remove(function(err) {
+	room.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(lab);
+			res.jsonp(room);
 		}
 	});
 };
 
 /**
- * List of Labs
+ * List of Rooms
  */
 exports.list = function(req, res) { 
-	Lab.find().sort('-created').populate('user', 'displayName').populate('building').exec(function(err, labs) {
+	Room.find().sort('-created').populate('user', 'displayName').populate('building','name').exec(function(err, rooms) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(labs);
+			res.jsonp(rooms);
 		}
 	});
 };
 
 /**
- * Lab middleware
+ * Room middleware
  */
-exports.labByID = function(req, res, next, id) { 
-	Lab.findById(id).populate('user', 'displayName').exec(function(err, lab) {
+exports.roomByID = function(req, res, next, id) { 
+	Room.findById(id).populate('user', 'displayName').populate('building','name').exec(function(err, room) {
 		if (err) return next(err);
-		if (! lab) return next(new Error('Failed to load Lab ' + id));
-		req.lab = lab ;
+		if (! room) return next(new Error('Failed to load Room ' + id));
+		req.room = room ;
 		next();
 	});
 };
 
 /**
- * Lab authorization middleware
+ * Room authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.lab.user.id !== req.user.id) {
+	if (req.room.user.id !== req.user.id) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();
