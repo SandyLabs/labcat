@@ -21,6 +21,9 @@ var RoomSchema = new Schema({
 		required: 'Please fill Room name',
 		trim: true
 	},
+    description: {
+        type: String
+    },
 	building: {
 		type: Schema.ObjectId,
 		ref: 'Building'

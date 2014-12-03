@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
 	Lab = mongoose.model('Lab'),
 	Store = mongoose.model('Store'),
 	Building = mongoose.model('Building'),
+    User = mongoose.model('User'),
 	_ = require('lodash');
 
 /**

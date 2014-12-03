@@ -1,20 +1,25 @@
 'use strict';
 
 // Rooms controller
-angular.module('rooms').controller('RoomsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Rooms', 'Buildings',
-	function($scope, $stateParams, $location, Authentication, Rooms, Buildings) {
+angular.module('rooms').controller('RoomsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Rooms', 'Buildings', 'Users',
+	function($scope, $stateParams, $location, Authentication, Rooms, Buildings, Users) {
 		$scope.authentication = Authentication;
 		$scope.types = ['Lab','Store'];
 		$scope.type = $scope.types[0];
-		$scope.buildings = Buildings.query();
+		$scope.buildings = Buildings.query(function(){
+            $scope.building = $scope.buildings[0]._id;
+        });
+        $scope.users = Users.query();
 
 		// Create new Room
 		$scope.create = function() {
 			// Create new Room object
 			var room = new Rooms({
 					name: this.name,
+                    description: this.description,
 					type: this.type,
-					building: this.building
+					building: this.building,
+                    manager: this.manager
 			});
 
 			// Redirect after save

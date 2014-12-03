@@ -71,3 +71,7 @@ a:hover, a:focus {
 	color: #98e5fc;
 }
 
+textarea.form-control {
+    resize: vertical;
+}
+
