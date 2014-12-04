@@ -22,17 +22,26 @@
                     <div class="controls">
                         <select ng-model="manager" ng-options="user._id as user.displayName for user in users" id="manager" class="form-control" placeholder="Manager" required></select>
                     </div>
-                    <label class="control-label" for="name">Type</label>
+                    <label class="control-label" for="type">Type</label>
                     <div class="controls">
                         <select ng-model="type" ng-options="type for type in types" id="type" class="form-control" placeholder="Type" required></select>
                     </div>
                 </div>
-                <div class="form-group" ng-hide="type =='Lab'">
-                    <label class="control-label" for="name">Name</label>
+
+                <div class="form-group ng-hide" ng-show="type =='Lab'">
+                    <label class="control-label" for="riskassessment">Risk Assessment</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="name" id="name2" class="form-control" placeholder="Name" required>
+                        <input type="url" data-ng-model="riskassessment" id="riskassessment" class="form-control" placeholder="" required>
+                    </div>
+                    <label class="control-label" for="trainers">Trainers</label>
+                    <multi-select input-model="users" button-label="displayName" item-label="displayName" tick-property="ticked" id="trainers">
+                    </multi-select>
+                    <label class="control-label" for="status">Status</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="status" id="status" class="form-control" placeholder="Ready" required>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">
                 </div>

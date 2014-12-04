@@ -1,7 +1,8 @@
 'use strict';
 
 // Rooms controller
-angular.module('rooms').controller('RoomsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Rooms', 'Buildings', 'Users',
+angular.module('rooms').controller('RoomsController', ['$scope', '$stateParams', '$location', 'Authentication',
+        'Rooms', 'Buildings', 'Users',
 	function($scope, $stateParams, $location, Authentication, Rooms, Buildings, Users) {
 		$scope.authentication = Authentication;
 		$scope.types = ['Lab','Store'];
@@ -9,7 +10,11 @@ angular.module('rooms').controller('RoomsController', ['$scope', '$stateParams',
 		$scope.buildings = Buildings.query(function(){
             $scope.building = $scope.buildings[0]._id;
         });
-        $scope.users = Users.query();
+        $scope.users = Users.query(function(){
+            $scope.users.forEach(function(user){
+                user.ticked = false;
+            })
+        });
 
 		// Create new Room
 		$scope.create = function() {
