@@ -4,7 +4,8 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'labcat';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils', 'multi-select'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',
+		'ui.router', 'ui.bootstrap', 'ui.utils', 'multi-select', 'angular-loading-bar', 'flow'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {

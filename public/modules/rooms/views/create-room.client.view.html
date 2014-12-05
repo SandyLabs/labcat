@@ -34,7 +34,7 @@
                         <input type="url" data-ng-model="riskassessment" id="riskassessment" class="form-control" placeholder="" required>
                     </div>
                     <label class="control-label" for="trainers">Trainers</label>
-                    <multi-select input-model="users" button-label="displayName" item-label="displayName" tick-property="ticked" id="trainers">
+                    <multi-select input-model="users" button-label="displayName" item-label="displayName" tick-property="ticked" id="trainers" selection-mode="single">
                     </multi-select>
                     <label class="control-label" for="status">Status</label>
                     <div class="controls">
@@ -50,5 +50,38 @@
 				</div>
             </fieldset>
         </form>
+    </div>
+    <div class="col-md-6">
+        <div flow-init flow-files-submitted="$flow.upload()"
+             flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
+            <label class="control-label">Room Image</label>
+            <div class="thumbnail" ng-show="!$flow.files.length">
+                <img src="http://www.placehold.it/320x240/EFEFEF/AAAAAA&text=no+image" />
+            </div>
+            <div class="thumbnail" ng-show="$flow.files.length">
+                <img flow-img="$flow.files[0]" />
+            </div>
+            <div ng-repeat="file in $flow.files">
+                <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                    <div class="progress-bar" role="progressbar"
+                         aria-valuenow="{{file.progress() * 100}}"
+                         aria-valuemin="0"
+                         aria-valuemax="100"
+                         ng-style="{width: (file.progress() * 100) + '%'}">
+                        <span class="sr-only">{{file.progress()}}% Complete</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p>
+                    Only PNG,GIF,JPG,JPEG files allowed.
+                </p>
+                <span class="btn btn-primary" ng-show="!$flow.files.length" flow-btn>Select image</span>
+                <span class="btn btn-info" ng-show="$flow.files.length" flow-btn>Change</span>
+                <span class="btn btn-danger" ng-show="$flow.files.length" ng-click="$flow.cancel()">
+                    Remove
+                </span>
+            </div>
+        </div>
     </div>
 </section>

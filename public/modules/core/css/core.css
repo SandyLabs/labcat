@@ -75,3 +75,18 @@ textarea.form-control {
     resize: vertical;
 }
 
+#loading-bar .bar {
+	background: #98e5fc;
+}
+
+#loading-bar .peg {
+	-moz-box-shadow: #98e5fc 1px 0 6px 1px;
+  	-ms-box-shadow: #98e5fc 1px 0 6px 1px;
+  	-webkit-box-shadow: #98e5fc 1px 0 6px 1px;
+  	box-shadow: #98e5fc 1px 0 6px 1px;
+}
+
+#loading-bar-spinner .spinner-icon {
+	border-top-color:  #98e5fc;
+  	border-left-color: #98e5fc;
+}

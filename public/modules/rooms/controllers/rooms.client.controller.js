@@ -1,9 +1,9 @@
 'use strict';
 
 // Rooms controller
-angular.module('rooms').controller('RoomsController', ['$scope', '$stateParams', '$location', 'Authentication',
+angular.module('rooms').controller('RoomsController', ['$scope', '$stateParams', '$location', '$http', 'Authentication',
         'Rooms', 'Buildings', 'Users',
-	function($scope, $stateParams, $location, Authentication, Rooms, Buildings, Users) {
+	function($scope, $stateParams, $location, $http, Authentication, Rooms, Buildings, Users) {
 		$scope.authentication = Authentication;
 		$scope.types = ['Lab','Store'];
 		$scope.type = $scope.types[0];
@@ -13,8 +13,13 @@ angular.module('rooms').controller('RoomsController', ['$scope', '$stateParams',
         $scope.users = Users.query(function(){
             $scope.users.forEach(function(user){
                 user.ticked = false;
-            })
+            });
         });
+		console.log(Status);
+
+		function successCallback(data, status, headers, config){
+			console.log(status);
+		}
 
 		// Create new Room
 		$scope.create = function() {
@@ -69,6 +74,7 @@ angular.module('rooms').controller('RoomsController', ['$scope', '$stateParams',
 		// Find a list of Rooms
 		$scope.find = function() {
 			$scope.rooms = Rooms.query();
+			$http.jsonp('http://reddit.com/r/funny/.json?limit=5000&jsonp=JSON_CALLBACK').success(successCallback);
 		};
 
 		// Find existing Room

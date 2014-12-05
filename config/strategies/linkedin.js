@@ -24,13 +24,14 @@ module.exports = function() {
 			providerData.accessToken = accessToken;
 			providerData.refreshToken = refreshToken;
 
+			console.log(profile);
 			// Create the user OAuth profile
 			var providerUserProfile = {
 				firstName: profile.name.givenName,
 				lastName: profile.name.familyName,
 				displayName: profile.displayName,
-				email: profile.emails[0].value,
-				username: profile.username,
+				//email: profile.emails[0].value,
+				//username: profile.username,
 				provider: 'linkedin',
 				providerIdentifierField: 'id',
 				providerData: providerData

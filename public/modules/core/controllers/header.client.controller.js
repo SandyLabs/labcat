@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus',
+angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus', 'cfpLoadingBar',
 	function($scope, Authentication, Menus) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
