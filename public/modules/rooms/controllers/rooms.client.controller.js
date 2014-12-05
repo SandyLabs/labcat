@@ -15,7 +15,6 @@ angular.module('rooms').controller('RoomsController', ['$scope', '$stateParams',
                 user.ticked = false;
             });
         });
-		console.log(Status);
 
 		function successCallback(data, status, headers, config){
 			console.log(status);
